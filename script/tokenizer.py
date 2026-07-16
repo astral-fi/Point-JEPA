@@ -196,52 +196,54 @@ class TokenizerWrapper(nn.Module):
         return logits
 
 
-tokenizer = PointCloudTokenizer(num_samples=64, k_neighbors=32, token_dim=128)
-tokenizer.to('cuda' if torch.cuda.is_available() else 'cpu')  # Move the model to GPU if available
-model = TokenizerWrapper(tokenizer)
-model.to('cuda' if torch.cuda.is_available() else 'cpu')  # Move the model to GPU if available
 
-optimizer = torch.optim.AdamW(model.parameters(), lr=0.001, weight_decay=1e-4)
-criterion = nn.CrossEntropyLoss()
-EPOCHS = 20
+if __name__ == "__main__":
+    tokenizer = PointCloudTokenizer(num_samples=64, k_neighbors=32, token_dim=128)
+    tokenizer.to('cuda' if torch.cuda.is_available() else 'cpu')  # Move the model to GPU if available
+    model = TokenizerWrapper(tokenizer)
+    model.to('cuda' if torch.cuda.is_available() else 'cpu')  # Move the model to GPU if available
 
-for epoch in range(EPOCHS):
-    train_loss = 0.0
+    optimizer = torch.optim.AdamW(model.parameters(), lr=0.001, weight_decay=1e-4)
+    criterion = nn.CrossEntropyLoss()
+    EPOCHS = 20
 
-    for points, labels in dataset_train_loader:
+    for epoch in range(EPOCHS):
+        train_loss = 0.0
 
-        points = points.to('cuda' if torch.cuda.is_available() else 'cpu')
-        labels = labels.to('cuda' if torch.cuda.is_available() else 'cpu')
+        for points, labels in dataset_train_loader:
 
-        logits = model(points)
-
-        loss = criterion(logits, labels)
-
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-        optimizer.zero_grad()
-
-        train_loss += loss.item()
-
-    print(f"Epoch [{epoch+1}/{EPOCHS}], Loss: {train_loss/len(dataset_train_loader):.4f}")
-
-    with torch.no_grad():
-        model.eval()
-        correct = 0
-        total = 0
-
-        for points, labels in dataset_test_loader:
             points = points.to('cuda' if torch.cuda.is_available() else 'cpu')
             labels = labels.to('cuda' if torch.cuda.is_available() else 'cpu')
 
             logits = model(points)
-            _, predicted = torch.max(logits.data, 1)
-            total += labels.size(0)
-            correct += (predicted == labels).sum().item()
 
-        accuracy = 100 * correct / total
-        print(f"Test Accuracy: {accuracy:.2f}%")
-        
+            loss = criterion(logits, labels)
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            optimizer.zero_grad()
+
+            train_loss += loss.item()
+
+        print(f"Epoch [{epoch+1}/{EPOCHS}], Loss: {train_loss/len(dataset_train_loader):.4f}")
+
+        with torch.no_grad():
+            model.eval()
+            correct = 0
+            total = 0
+
+            for points, labels in dataset_test_loader:
+                points = points.to('cuda' if torch.cuda.is_available() else 'cpu')
+                labels = labels.to('cuda' if torch.cuda.is_available() else 'cpu')
+
+                logits = model(points)
+                _, predicted = torch.max(logits.data, 1)
+                total += labels.size(0)
+                correct += (predicted == labels).sum().item()
+
+            accuracy = 100 * correct / total
+            print(f"Test Accuracy: {accuracy:.2f}%")
+            
 
 
