@@ -58,7 +58,7 @@ class ModelNet40Dataset(Dataset):
         sample = sample / np.linalg.norm(sample, axis=1).max()  # Normalize to unit sphere
         sample = sample.astype(np.float32)
         sample = torch.from_numpy(sample)
-        label = self.labels[idx].astype(np.int64)
+        label = self.labels[idx][0].astype(np.int64)
         label = torch.tensor(label)
 
         return sample, label
