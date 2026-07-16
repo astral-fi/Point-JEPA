@@ -41,10 +41,12 @@ if __name__ == "__main__":
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=0.001, weight_decay=1e-4)
     criterion = nn.CrossEntropyLoss()
-    EPOCHS = 20
+    EPOCHS = 50
 
     for epoch in range(EPOCHS):
         train_loss = 0.0
+        correct = 0
+        total = 0
 
         for points, labels in dataset_train_loader:
 
@@ -54,6 +56,9 @@ if __name__ == "__main__":
             logits = model(points)
 
             loss = criterion(logits, labels)
+            _, predicted = torch.max(logits.data, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
 
             optimizer.zero_grad()
             loss.backward()
@@ -62,7 +67,8 @@ if __name__ == "__main__":
 
             train_loss += loss.item()
 
-        print(f"Epoch [{epoch+1}/{EPOCHS}], Loss: {train_loss/len(dataset_train_loader):.4f}")
+        accuracy = 100 * correct / total
+        print(f"Epoch [{epoch+1}/{EPOCHS}], Loss: {train_loss/len(dataset_train_loader):.4f}, Training Accuracy: {accuracy:.2f}%")
 
         with torch.no_grad():
             model.eval()
