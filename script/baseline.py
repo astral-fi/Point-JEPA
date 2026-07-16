@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=0.001, weight_decay=1e-4)
     criterion = nn.CrossEntropyLoss()
-    EPOCHS = 20
+    EPOCHS = 100
 
     for epoch in range(EPOCHS):
         train_loss = 0.0
