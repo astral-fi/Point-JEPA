@@ -158,9 +158,6 @@ class PointCloudTokenizer(nn.Module):
         """
         
         sampled_points, knn_indices = self.tokenize(point_clouds)
-        print("Sampled points shape:", sampled_points.shape)  # Should print (B, M, 3)
-        print("KNN indices shape:", knn_indices.shape)  # Should print (B, M, k)
-        print("Point clouds shape:", point_clouds.shape)  # Should print (B, N, 3)
         grouped_points = point_clouds[torch.arange(point_clouds.shape[0])[:, None, None], knn_indices]  # Shape: (B, M, k, 3)
         
         # Convert sampled points to torch tensor
@@ -215,7 +212,7 @@ for epoch in range(EPOCHS):
 
         points = points.to('cuda' if torch.cuda.is_available() else 'cpu')
         labels = labels.to('cuda' if torch.cuda.is_available() else 'cpu')
-        
+
         logits = model(points)
 
         loss = criterion(logits, labels)
