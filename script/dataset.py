@@ -88,9 +88,9 @@ class ModelNet40Dataset(Dataset):
             sample = scale_point_cloud(sample)
             random_indices = np.random.choice(sample.shape[0], self.target_points, replace=False)
             sample = sample[random_indices]
-            sample = sample - sample.mean(axis=0)  # Center the point cloud
-            sample = sample / np.linalg.norm(sample, axis=1).max()  # Normalize to unit sphere
-
+            
+        sample = sample - sample.mean(axis=0)  # Center the point cloud
+        sample = sample / np.linalg.norm(sample, axis=1).max()  # Normalize to unit sphere
         sample = sample.astype(np.float32)
         sample = torch.from_numpy(sample)
         label = self.labels[idx][0].astype(np.int64)
