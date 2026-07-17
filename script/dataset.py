@@ -89,7 +89,6 @@ class ModelNet40Dataset(Dataset):
             random_indices = np.random.choice(sample.shape[0], self.target_points, replace=False)
             sample = sample[random_indices]
             sample = jitter_point_cloud(sample)
-            sample = scale_point_cloud(sample)
             
         sample = sample.astype(np.float32)
         sample = torch.from_numpy(sample)
