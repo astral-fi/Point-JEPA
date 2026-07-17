@@ -6,32 +6,8 @@ from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import LinearLR, CosineAnnealingLR, SequentialLR
 import wandb
 
-data_train, label_train = concatenate_h5_files(DATASET_PATH, 5, 'train')
-data_test, label_test = concatenate_h5_files(DATASET_PATH, 2, 'test')
-
-dataset_train = ModelNet40Dataset(data_train, label_train, 1024, augment=True)
-dataset_train_loader = DataLoader(dataset_train, batch_size=64, shuffle=True)
-dataset_test = ModelNet40Dataset(data_test, label_test, 1024, augment=False)
-dataset_test_loader = DataLoader(dataset_test, batch_size=64, shuffle=False)
-print(f"Training dataset size: {len(dataset_train)}, Testing dataset size: {len(dataset_test)}")
 
 
-wandb.init(
-    project="point-jepa",
-    name="baseline-initial",
-    config={
-        "num_layers": 8,
-        "num_heads": 2,
-        "token_dim": 128,
-        "ff_dim": 512,
-        "dropout": 0.1,
-        "lr": 3e-4,
-        "weight_decay": 0.01,
-        "batch_size": 64,
-        "num_epochs": 100,
-        "warmup_epochs": 10,
-    },
-)
 
 class BaselineModel(nn.Module):
     def __init__(self, tokenizer):
@@ -61,6 +37,32 @@ class BaselineModel(nn.Module):
 
 
 if __name__ == "__main__":
+
+    data_train, label_train = concatenate_h5_files(DATASET_PATH, 5, 'train')
+    data_test, label_test = concatenate_h5_files(DATASET_PATH, 2, 'test')
+
+    dataset_train = ModelNet40Dataset(data_train, label_train, 1024, augment=True)
+    dataset_train_loader = DataLoader(dataset_train, batch_size=64, shuffle=True)
+    dataset_test = ModelNet40Dataset(data_test, label_test, 1024, augment=False)
+    dataset_test_loader = DataLoader(dataset_test, batch_size=64, shuffle=False)
+    print(f"Training dataset size: {len(dataset_train)}, Testing dataset size: {len(dataset_test)}")
+
+    wandb.init(
+    project="point-jepa",
+    name="baseline-initial",
+    config={
+        "num_layers": 8,
+        "num_heads": 2,
+        "token_dim": 128,
+        "ff_dim": 512,
+        "dropout": 0.1,
+        "lr": 3e-4,
+        "weight_decay": 0.01,
+        "batch_size": 64,
+        "num_epochs": 100,
+        "warmup_epochs": 10,
+    },
+    )
     tokenizer = Tokenizer(num_samples=64, k_neighbors=32, token_dim=128)
 
     tokenizer.to('cuda' if torch.cuda.is_available() else 'cpu')  # Move the model to GPU if available
