@@ -46,18 +46,12 @@ if __name__ == "__main__":
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=0.001, weight_decay=1e-4)
     criterion = nn.CrossEntropyLoss()
-<<<<<<< HEAD
     EPOCHS = 50
     warmup_epochs = 5
 
     warmup_scheduler = LinearLR(optimizer, start_factor=0.01, end_factor=1.0, total_iters=warmup_epochs)
     cosine_scheduler = CosineAnnealingLR(optimizer, T_max=EPOCHS - warmup_epochs, eta_min=1e-6)
     scheduler = SequentialLR(optimizer, schedulers=[warmup_scheduler, cosine_scheduler], milestones=[warmup_epochs])
-
-=======
-
-    EPOCHS = 100
->>>>>>> 25eaeebfb7be71848448b632e1fa567554022d5d
 
     for epoch in range(EPOCHS):
         train_loss = 0.0
