@@ -5,7 +5,6 @@ from torch.utils.data import Dataset
 import matplotlib.pyplot as plt
 
 torch.manual_seed(42)  # For reproducibility
-np.random.seed(42)  # For reproducibility
 
 DATASET_PATH = '../modelnet40_ply_hdf5_2048'  # Replace with your HDF5 file path
 
@@ -91,7 +90,7 @@ class ModelNet40Dataset(Dataset):
             sample = sample[random_indices]
             sample = sample - sample.mean(axis=0)  # Center the point cloud
             sample = sample / np.linalg.norm(sample, axis=1).max()  # Normalize to unit sphere
-            
+
         sample = sample.astype(np.float32)
         sample = torch.from_numpy(sample)
         label = self.labels[idx][0].astype(np.int64)
