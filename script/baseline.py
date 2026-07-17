@@ -75,6 +75,10 @@ if __name__ == "__main__":
     cosine_scheduler = CosineAnnealingLR(optimizer, T_max=EPOCHS - warmup_epochs, eta_min=1e-6)
     scheduler = SequentialLR(optimizer, schedulers=[warmup_scheduler, cosine_scheduler], milestones=[warmup_epochs])
 
+    best_test_acc = 0.0
+    patience = 15
+    patience_counter = 0
+
     for epoch in range(EPOCHS):
         train_loss = 0.0
         correct = 0
@@ -122,6 +126,22 @@ if __name__ == "__main__":
 
 
         current_lr = optimizer.param_groups[0]['lr']
+
+
+        if test_accuracy > best_test_acc:
+            best_test_acc = test_accuracy
+            patience_counter = 0  # Reset counter because we improved!
+            # Save the absolute best weights
+            torch.save(model.state_dict(), 'best_baseline_model.pth')
+            print(f"--> New best model saved with Test Accuracy: {best_test_acc:.2f}%")
+        else:
+            patience_counter += 1
+
+        # Early Stopping Trigger
+        if patience_counter >= patience:
+            print(f"=== Early stopping triggered! Test accuracy hasn't improved for {patience} epochs. ===")
+            print(f"=== Best Test Accuracy achieved: {best_test_acc:.2f}% ===")
+            break
 
         wandb.log({
         "epoch": epoch,
