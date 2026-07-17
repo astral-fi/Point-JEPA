@@ -54,7 +54,8 @@ class BaselineModel(nn.Module):
         x = self.encoder(combined_tokens)
         cls_token = x[:, 0, :]  # Extract the cls token representation
         max_pooled, _ = torch.max(x[:, 1:, :], dim=1)  # Max pooling over the token dimension (excluding cls token)
-        x = torch.cat((cls_token, max_pooled), dim=-1)  # Concatenate cls token representation with max pooled representation
+        x = torch.cat((cls_token, max_pooled), dim=-1)
+        x = self.head_count(x)  # Concatenate cls token representation with max pooled representation
         x = self.linear_head(x)
         return x
 
