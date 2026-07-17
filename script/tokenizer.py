@@ -96,8 +96,12 @@ class PointCloudTokenizer(nn.Module):
         distances = torch.full((B, N), float('inf')).to(points_batches.device) #Initialize distances to infinity for each point in the batch
 
         # Randomly select the first point
-        sampled_indices[:, 0] = torch.randint(0, N, size=(B,)).to(points_batches.device) #[row_section, column_section] Assign a random index for each batch on the first column of sampled_indices
-        
+
+        if self.training:
+            sampled_indices[:, 0] = torch.randint(0, N, size=(B,)).to(points_batches.device) #[row_section, column_section] Assign a random index for each batch on the first column of sampled_indices
+        else:
+            sampled_indices[:, 0] = 0
+            
         for i in range(1, num_samples):
             # Update distances to the nearest sampled point
             last_sampled_points = points_batches[torch.arange(B)[:, None], sampled_indices[:, i - 1].reshape(-1, 1)] #Get the last sampled point for each batch
