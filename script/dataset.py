@@ -1,7 +1,7 @@
 import h5py 
 import numpy as np
 import torch
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, DataLoader
 import matplotlib.pyplot as plt
 
 torch.manual_seed(42)  # For reproducibility
@@ -100,19 +100,63 @@ class ModelNet40Dataset(Dataset):
         return sample, label
 
 
-def visualize_point_cloud(point_cloud, title="Point Cloud"):
-    """
-    Visualizes a 3D point cloud using matplotlib.
+import plotly.graph_objects as go
 
-    Parameters:
-    point_cloud (numpy.ndarray): The point cloud data to visualize, shape (N, 3).
-    title (str): The title of the plot.
-    """
-    fig = plt.figure(figsize=(8, 6))
-    ax = fig.add_subplot(111, projection='3d')
-    ax.scatter(point_cloud[:, 0], point_cloud[:, 1], point_cloud[:, 2], s=1)
-    ax.set_title(title)
-    ax.set_xlabel('X')
-    ax.set_ylabel('Y')
-    ax.set_zlabel('Z')
-    plt.show()
+def visualize_point_cloud_plotly(point_cloud, title="ModelNet40 Object"):
+    # 1. Automatically handle PyTorch tensors and batch dimensions
+    if isinstance(point_cloud, torch.Tensor):
+        point_cloud = point_cloud.squeeze().cpu().numpy()
+    
+    # Ensure shape is (N, 3)
+    if len(point_cloud.shape) != 2 or point_cloud.shape[1] != 3:
+        raise ValueError(f"Expected shape (N, 3), but got {point_cloud.shape}")
+
+    # Extract coordinates
+    x, y, z = point_cloud[:, 0], point_cloud[:, 1], point_cloud[:, 2]
+
+    # 2. Build the plot with slightly larger, soft-edged markers
+    fig = go.Figure(data=[go.Scatter3d(
+        x=x, y=y, z=z,
+        mode='markers',
+        marker=dict(
+            size=3.5,                  # Slightly larger to fill gaps
+            color=z,                  # Color-coded by depth (Z-axis)
+            colorscale='Viridis',
+            opacity=0.85              # Soft edges blend together better
+        )
+    )])
+
+    # 3. Force 1:1:1 scale ratios and clean up background clutter
+    fig.update_layout(
+        title=title,
+        scene=dict(
+            aspectmode='data',        # CRITICAL: Prevents stretching/distortion
+            xaxis=dict(showbackground=False, showgrid=False, zeroline=False),
+            yaxis=dict(showbackground=False, showgrid=False, zeroline=False),
+            zaxis=dict(showbackground=False, showgrid=False, zeroline=False),
+        ),
+        margin=dict(l=0, r=0, b=0, t=40),
+        template="plotly_dark"        # Dark mode makes the neon point cloud pop beautifully!
+    )
+    fig.show()
+
+
+data_train, label_train = concatenate_h5_files(DATASET_PATH, 5, 'train')
+data_test, label_test = concatenate_h5_files(DATASET_PATH, 2, 'test')
+
+dataset_train = ModelNet40Dataset(data_train, label_train, 1024)
+dataset_train_loader = DataLoader(dataset_train, batch_size=64, shuffle=True)
+dataset_test = ModelNet40Dataset(data_test, label_test, 1024)
+dataset_test_loader = DataLoader(dataset_test, batch_size=64, shuffle=False)
+
+for points, labels in dataset_test_loader:
+
+    for i in range(min(5, points.size(0))):  # Visualize up to 5 point clouds
+        visualize_point_cloud_plotly(points[i].numpy(), title=f"Label: {labels[i].item()}")
+        rotated_points = rotate_point_cloud(points[i].numpy())
+        jittered_points = jitter_point_cloud(points[i].numpy())
+        scaled_points = scale_point_cloud(points[i].numpy())
+        visualize_point_cloud_plotly(scaled_points, title=f"Scaled Point Cloud - Label: {labels[i].item()}")
+
+
+    break  # Just inspect the first batch
