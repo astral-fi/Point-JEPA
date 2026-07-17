@@ -1,0 +1,202 @@
+Epoch [1/100], Loss: 3.6870, Training Accuracy: 4.42%
+Test Accuracy: 4.05%
+Epoch [2/100], Loss: 3.2730, Training Accuracy: 16.47%
+Test Accuracy: 19.61%
+Epoch [3/100], Loss: 2.0890, Training Accuracy: 46.82%
+Test Accuracy: 50.65%
+Epoch [4/100], Loss: 1.3369, Training Accuracy: 65.26%
+Test Accuracy: 69.00%
+/home/ashutosh24135/miniconda3/envs/point-jepa/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:209: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+Epoch [5/100], Loss: 0.9898, Training Accuracy: 72.75%
+Test Accuracy: 73.46%
+Epoch [6/100], Loss: 0.8091, Training Accuracy: 77.06%
+Test Accuracy: 77.88%
+Epoch [7/100], Loss: 0.6799, Training Accuracy: 80.22%
+Test Accuracy: 78.81%
+Epoch [8/100], Loss: 0.5704, Training Accuracy: 83.15%
+Test Accuracy: 78.20%
+Epoch [9/100], Loss: 0.5254, Training Accuracy: 84.05%
+Test Accuracy: 82.58%
+Epoch [10/100], Loss: 0.4714, Training Accuracy: 85.53%
+Test Accuracy: 81.08%
+Epoch [11/100], Loss: 0.4508, Training Accuracy: 86.01%
+Test Accuracy: 83.10%
+Epoch [12/100], Loss: 0.4061, Training Accuracy: 87.36%
+Test Accuracy: 83.43%
+Epoch [13/100], Loss: 0.3714, Training Accuracy: 88.21%
+Test Accuracy: 83.55%
+Epoch [14/100], Loss: 0.3663, Training Accuracy: 88.17%
+Test Accuracy: 85.17%
+Epoch [15/100], Loss: 0.3319, Training Accuracy: 89.23%
+Test Accuracy: 81.44%
+Epoch [16/100], Loss: 0.3254, Training Accuracy: 89.16%
+Test Accuracy: 84.89%
+Epoch [17/100], Loss: 0.3045, Training Accuracy: 89.89%
+Test Accuracy: 85.13%
+Epoch [18/100], Loss: 0.2960, Training Accuracy: 90.20%
+Test Accuracy: 84.40%
+Epoch [19/100], Loss: 0.2770, Training Accuracy: 90.82%
+Test Accuracy: 86.47%
+Epoch [20/100], Loss: 0.2641, Training Accuracy: 90.97%
+Test Accuracy: 86.43%
+Epoch [21/100], Loss: 0.2634, Training Accuracy: 90.99%
+Test Accuracy: 86.75%
+Epoch [22/100], Loss: 0.2491, Training Accuracy: 91.47%
+Test Accuracy: 85.98%
+Epoch [23/100], Loss: 0.2348, Training Accuracy: 92.30%
+Test Accuracy: 87.44%
+Epoch [24/100], Loss: 0.2354, Training Accuracy: 91.92%
+Test Accuracy: 86.02%
+Epoch [25/100], Loss: 0.2291, Training Accuracy: 92.15%
+Test Accuracy: 86.67%
+Epoch [26/100], Loss: 0.2116, Training Accuracy: 92.64%
+Test Accuracy: 87.48%
+Epoch [27/100], Loss: 0.2048, Training Accuracy: 93.14%
+Test Accuracy: 87.24%
+Epoch [28/100], Loss: 0.2040, Training Accuracy: 92.95%
+Test Accuracy: 87.44%
+Epoch [29/100], Loss: 0.1912, Training Accuracy: 93.42%
+Test Accuracy: 87.36%
+Epoch [30/100], Loss: 0.1846, Training Accuracy: 93.68%
+Test Accuracy: 87.60%
+Epoch [31/100], Loss: 0.1823, Training Accuracy: 93.60%
+Test Accuracy: 86.71%
+Epoch [32/100], Loss: 0.1869, Training Accuracy: 93.40%
+Test Accuracy: 88.33%
+Epoch [33/100], Loss: 0.1761, Training Accuracy: 93.76%
+Test Accuracy: 87.20%
+Epoch [34/100], Loss: 0.1763, Training Accuracy: 93.60%
+Test Accuracy: 87.16%
+Epoch [35/100], Loss: 0.1675, Training Accuracy: 94.02%
+Test Accuracy: 88.21%
+Epoch [36/100], Loss: 0.1573, Training Accuracy: 94.28%
+Test Accuracy: 86.39%
+Epoch [37/100], Loss: 0.1479, Training Accuracy: 94.75%
+Test Accuracy: 87.56%
+Epoch [38/100], Loss: 0.1491, Training Accuracy: 94.53%
+Test Accuracy: 87.84%
+Epoch [39/100], Loss: 0.1524, Training Accuracy: 94.54%
+Test Accuracy: 87.56%
+Epoch [40/100], Loss: 0.1364, Training Accuracy: 95.21%
+Test Accuracy: 88.49%
+Epoch [41/100], Loss: 0.1309, Training Accuracy: 95.46%
+Test Accuracy: 87.84%
+Epoch [42/100], Loss: 0.1372, Training Accuracy: 95.03%
+Test Accuracy: 87.20%
+Epoch [43/100], Loss: 0.1266, Training Accuracy: 95.65%
+Test Accuracy: 86.75%
+Epoch [44/100], Loss: 0.1250, Training Accuracy: 95.47%
+Test Accuracy: 87.52%
+Epoch [45/100], Loss: 0.1208, Training Accuracy: 95.73%
+Test Accuracy: 86.99%
+Epoch [46/100], Loss: 0.1190, Training Accuracy: 95.76%
+Test Accuracy: 87.84%
+Epoch [47/100], Loss: 0.1119, Training Accuracy: 95.98%
+Test Accuracy: 87.97%
+Epoch [48/100], Loss: 0.1170, Training Accuracy: 95.71%
+Test Accuracy: 88.25%
+Epoch [49/100], Loss: 0.1093, Training Accuracy: 96.13%
+Test Accuracy: 87.56%
+Epoch [50/100], Loss: 0.1008, Training Accuracy: 96.39%
+Test Accuracy: 87.56%
+Epoch [51/100], Loss: 0.1063, Training Accuracy: 96.20%
+Test Accuracy: 87.80%
+Epoch [52/100], Loss: 0.1029, Training Accuracy: 96.38%
+Test Accuracy: 86.26%
+Epoch [53/100], Loss: 0.1024, Training Accuracy: 96.11%
+Test Accuracy: 87.60%
+Epoch [54/100], Loss: 0.0970, Training Accuracy: 96.49%
+Test Accuracy: 88.90%
+Epoch [55/100], Loss: 0.0908, Training Accuracy: 96.52%
+Test Accuracy: 88.33%
+Epoch [56/100], Loss: 0.0920, Training Accuracy: 96.65%
+Test Accuracy: 87.24%
+Epoch [57/100], Loss: 0.0811, Training Accuracy: 97.16%
+Test Accuracy: 88.01%
+Epoch [58/100], Loss: 0.0850, Training Accuracy: 96.94%
+Test Accuracy: 87.80%
+Epoch [59/100], Loss: 0.0749, Training Accuracy: 97.31%
+Test Accuracy: 87.88%
+Epoch [60/100], Loss: 0.0821, Training Accuracy: 97.05%
+Test Accuracy: 87.03%
+Epoch [61/100], Loss: 0.0735, Training Accuracy: 97.43%
+Test Accuracy: 88.09%
+Epoch [62/100], Loss: 0.0704, Training Accuracy: 97.38%
+Test Accuracy: 88.70%
+Epoch [63/100], Loss: 0.0707, Training Accuracy: 97.41%
+Test Accuracy: 87.72%
+Epoch [64/100], Loss: 0.0717, Training Accuracy: 97.38%
+Test Accuracy: 87.88%
+Epoch [65/100], Loss: 0.0678, Training Accuracy: 97.56%
+Test Accuracy: 87.56%
+Epoch [66/100], Loss: 0.0676, Training Accuracy: 97.70%
+Test Accuracy: 87.56%
+Epoch [67/100], Loss: 0.0625, Training Accuracy: 97.89%
+Test Accuracy: 87.80%
+Epoch [68/100], Loss: 0.0596, Training Accuracy: 98.03%
+Test Accuracy: 87.93%
+Epoch [69/100], Loss: 0.0602, Training Accuracy: 97.97%
+Test Accuracy: 87.84%
+Epoch [70/100], Loss: 0.0588, Training Accuracy: 97.83%
+Test Accuracy: 88.13%
+Epoch [71/100], Loss: 0.0573, Training Accuracy: 98.03%
+Test Accuracy: 87.84%
+Epoch [72/100], Loss: 0.0556, Training Accuracy: 98.03%
+Test Accuracy: 88.37%
+Epoch [73/100], Loss: 0.0572, Training Accuracy: 97.84%
+Test Accuracy: 88.37%
+Epoch [74/100], Loss: 0.0543, Training Accuracy: 98.09%
+Test Accuracy: 88.49%
+Epoch [75/100], Loss: 0.0496, Training Accuracy: 98.26%
+Test Accuracy: 87.88%
+Epoch [76/100], Loss: 0.0493, Training Accuracy: 98.25%
+Test Accuracy: 88.29%
+Epoch [77/100], Loss: 0.0492, Training Accuracy: 98.21%
+Test Accuracy: 88.82%
+Epoch [78/100], Loss: 0.0470, Training Accuracy: 98.30%
+Test Accuracy: 88.49%
+Epoch [79/100], Loss: 0.0450, Training Accuracy: 98.28%
+Test Accuracy: 88.61%
+Epoch [80/100], Loss: 0.0460, Training Accuracy: 98.40%
+Test Accuracy: 88.57%
+Epoch [81/100], Loss: 0.0443, Training Accuracy: 98.39%
+Test Accuracy: 88.61%
+Epoch [82/100], Loss: 0.0414, Training Accuracy: 98.52%
+Test Accuracy: 88.13%
+Epoch [83/100], Loss: 0.0406, Training Accuracy: 98.57%
+Test Accuracy: 88.90%
+Epoch [84/100], Loss: 0.0403, Training Accuracy: 98.63%
+Test Accuracy: 89.18%
+Epoch [85/100], Loss: 0.0394, Training Accuracy: 98.60%
+Test Accuracy: 88.65%
+Epoch [86/100], Loss: 0.0407, Training Accuracy: 98.55%
+Test Accuracy: 87.88%
+Epoch [87/100], Loss: 0.0385, Training Accuracy: 98.66%
+Test Accuracy: 88.78%
+Epoch [88/100], Loss: 0.0377, Training Accuracy: 98.65%
+Test Accuracy: 88.57%
+Epoch [89/100], Loss: 0.0367, Training Accuracy: 98.79%
+Test Accuracy: 88.25%
+Epoch [90/100], Loss: 0.0371, Training Accuracy: 98.74%
+Test Accuracy: 88.25%
+Epoch [91/100], Loss: 0.0352, Training Accuracy: 98.75%
+Test Accuracy: 88.33%
+Epoch [92/100], Loss: 0.0395, Training Accuracy: 98.64%
+Test Accuracy: 88.98%
+Epoch [93/100], Loss: 0.0359, Training Accuracy: 98.70%
+Test Accuracy: 88.78%
+Epoch [94/100], Loss: 0.0339, Training Accuracy: 98.84%
+Test Accuracy: 88.13%
+Epoch [95/100], Loss: 0.0354, Training Accuracy: 98.81%
+Test Accuracy: 88.70%
+Epoch [96/100], Loss: 0.0364, Training Accuracy: 98.71%
+Test Accuracy: 88.05%
+Epoch [97/100], Loss: 0.0341, Training Accuracy: 98.80%
+Test Accuracy: 88.45%
+Epoch [98/100], Loss: 0.0346, Training Accuracy: 98.88%
+Test Accuracy: 87.84%
+Epoch [99/100], Loss: 0.0360, Training Accuracy: 98.59%
+Test Accuracy: 88.41%
+Epoch [100/100], Loss: 0.0336, Training Accuracy: 98.76%
+Test Accuracy: 88.45%

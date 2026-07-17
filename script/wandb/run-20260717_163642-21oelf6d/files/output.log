@@ -1,0 +1,82 @@
+Epoch [1/100], Loss: 3.7263, Training Accuracy: 3.47%
+Test Accuracy: 4.05%
+Epoch [2/100], Loss: 3.4263, Training Accuracy: 11.03%
+Test Accuracy: 8.23%
+Epoch [3/100], Loss: 2.4233, Training Accuracy: 39.15%
+Test Accuracy: 42.95%
+Epoch [4/100], Loss: 1.5062, Training Accuracy: 60.64%
+Test Accuracy: 53.40%
+/home/ashutosh24135/miniconda3/envs/point-jepa/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:209: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+Epoch [5/100], Loss: 1.1160, Training Accuracy: 69.98%
+Test Accuracy: 63.09%
+Epoch [6/100], Loss: 0.9163, Training Accuracy: 74.16%
+Test Accuracy: 61.35%
+Epoch [7/100], Loss: 0.7911, Training Accuracy: 76.63%
+Test Accuracy: 58.71%
+Epoch [8/100], Loss: 0.6930, Training Accuracy: 79.44%
+Test Accuracy: 50.93%
+Epoch [9/100], Loss: 0.6419, Training Accuracy: 81.11%
+Test Accuracy: 53.57%
+Epoch [10/100], Loss: 0.5785, Training Accuracy: 82.75%
+Test Accuracy: 66.29%
+Epoch [11/100], Loss: 0.5525, Training Accuracy: 83.06%
+Test Accuracy: 63.74%
+Epoch [12/100], Loss: 0.4970, Training Accuracy: 85.03%
+Test Accuracy: 70.46%
+Epoch [13/100], Loss: 0.4778, Training Accuracy: 85.26%
+Test Accuracy: 69.12%
+Epoch [14/100], Loss: 0.4539, Training Accuracy: 85.64%
+Test Accuracy: 65.64%
+Epoch [15/100], Loss: 0.4342, Training Accuracy: 86.20%
+Test Accuracy: 56.60%
+Epoch [16/100], Loss: 0.4176, Training Accuracy: 86.85%
+Test Accuracy: 68.96%
+Epoch [17/100], Loss: 0.3932, Training Accuracy: 87.49%
+Test Accuracy: 66.09%
+Epoch [18/100], Loss: 0.3820, Training Accuracy: 87.53%
+Test Accuracy: 65.60%
+Epoch [19/100], Loss: 0.3732, Training Accuracy: 88.09%
+Test Accuracy: 59.08%
+Epoch [20/100], Loss: 0.3548, Training Accuracy: 88.46%
+Test Accuracy: 78.04%
+Epoch [21/100], Loss: 0.3385, Training Accuracy: 88.89%
+Test Accuracy: 76.13%
+Epoch [22/100], Loss: 0.3329, Training Accuracy: 88.76%
+Test Accuracy: 71.07%
+Epoch [23/100], Loss: 0.3208, Training Accuracy: 89.74%
+Test Accuracy: 70.99%
+Epoch [24/100], Loss: 0.3079, Training Accuracy: 89.76%
+Test Accuracy: 63.13%
+Epoch [25/100], Loss: 0.3045, Training Accuracy: 89.79%
+Test Accuracy: 70.38%
+Epoch [26/100], Loss: 0.2919, Training Accuracy: 90.42%
+Test Accuracy: 62.28%
+Epoch [27/100], Loss: 0.2891, Training Accuracy: 90.27%
+Test Accuracy: 71.07%
+Epoch [28/100], Loss: 0.2765, Training Accuracy: 90.72%
+Test Accuracy: 69.25%
+Epoch [29/100], Loss: 0.2716, Training Accuracy: 90.75%
+Test Accuracy: 71.03%
+Epoch [30/100], Loss: 0.2666, Training Accuracy: 91.25%
+Test Accuracy: 78.08%
+Epoch [31/100], Loss: 0.2567, Training Accuracy: 91.06%
+Test Accuracy: 68.88%
+Epoch [32/100], Loss: 0.2520, Training Accuracy: 91.47%
+Test Accuracy: 64.06%
+Epoch [33/100], Loss: 0.2536, Training Accuracy: 91.07%
+Test Accuracy: 76.94%
+Epoch [34/100], Loss: 0.2459, Training Accuracy: 91.58%
+Test Accuracy: 66.90%
+Epoch [35/100], Loss: 0.2300, Training Accuracy: 92.12%
+Test Accuracy: 73.95%
+Epoch [36/100], Loss: 0.2314, Training Accuracy: 91.81%
+Test Accuracy: 70.87%
+Epoch [37/100], Loss: 0.2205, Training Accuracy: 92.61%
+Test Accuracy: 74.59%
+Epoch [38/100], Loss: 0.2163, Training Accuracy: 92.67%
+Test Accuracy: 75.81%
+Traceback (most recent call last):
+  File "/home/ashutosh24135/Point-JEPA/script/baseline.py", line 89, in <module>
+    correct += (predicted == labels).sum().item()
+KeyboardInterrupt

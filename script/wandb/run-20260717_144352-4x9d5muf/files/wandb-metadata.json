@@ -1,0 +1,40 @@
+{
+  "os":  "Linux-5.15.0-43-generic-x86_64-with-glibc2.35",
+  "python":  "CPython 3.9.23",
+  "startedAt":  "2026-07-17T14:43:52.478042Z",
+  "program":  "/home/ashutosh24135/Point-JEPA/script/baseline.py",
+  "codePath":  "script/baseline.py",
+  "codePathLocal":  "baseline.py",
+  "git":  {
+    "remote":  "git@github.com:astral-fi/Point-JEPA.git",
+    "commit":  "252473ecc0ba6c454603ac4902db7ed5b80bc40b"
+  },
+  "email":  "ashutosh24135@iiitd.ac.in",
+  "root":  "/home/ashutosh24135/Point-JEPA/script",
+  "host":  "iras-hub",
+  "executable":  "/home/ashutosh24135/miniconda3/envs/point-jepa/bin/python3",
+  "cpu_count":  16,
+  "cpu_count_logical":  16,
+  "gpu":  "NVIDIA A30",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "942328844288",
+      "used":  "162754637824"
+    }
+  },
+  "memory":  {
+    "total":  "270126391296"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA A30",
+      "memoryTotal":  "25769803776",
+      "cudaCores":  3584,
+      "architecture":  "Ampere",
+      "uuid":  "GPU-825bc740-91d3-16c3-2d66-044b721b3f99"
+    }
+  ],
+  "cudaVersion":  "12.4",
+  "writerId":  "33nzsewqe7htxw0cphhh8oiqn0cpnx8d"
+}

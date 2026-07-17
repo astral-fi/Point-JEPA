@@ -1,0 +1,96 @@
+Epoch [1/100], Loss: 3.7258, Training Accuracy: 3.57%
+Test Accuracy: 4.05%
+Epoch [2/100], Loss: 3.4533, Training Accuracy: 9.72%
+Test Accuracy: 7.90%
+Epoch [3/100], Loss: 2.9928, Training Accuracy: 25.28%
+Test Accuracy: 19.37%
+Epoch [4/100], Loss: 2.3653, Training Accuracy: 37.80%
+Test Accuracy: 22.97%
+/home/ashutosh24135/miniconda3/envs/point-jepa/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:209: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+Epoch [5/100], Loss: 2.0576, Training Accuracy: 43.82%
+Test Accuracy: 28.24%
+Epoch [6/100], Loss: 1.8510, Training Accuracy: 48.27%
+Test Accuracy: 25.24%
+Epoch [7/100], Loss: 1.6787, Training Accuracy: 51.43%
+Test Accuracy: 28.20%
+Epoch [8/100], Loss: 1.5363, Training Accuracy: 55.39%
+Test Accuracy: 17.83%
+Epoch [9/100], Loss: 1.4284, Training Accuracy: 58.07%
+Test Accuracy: 23.54%
+Epoch [10/100], Loss: 1.3379, Training Accuracy: 60.74%
+Test Accuracy: 32.50%
+Epoch [11/100], Loss: 1.2451, Training Accuracy: 63.45%
+Test Accuracy: 31.24%
+Epoch [12/100], Loss: 1.1978, Training Accuracy: 64.49%
+Test Accuracy: 46.31%
+Epoch [13/100], Loss: 1.1426, Training Accuracy: 66.35%
+Test Accuracy: 33.10%
+Epoch [14/100], Loss: 1.0666, Training Accuracy: 68.37%
+Test Accuracy: 34.04%
+Epoch [15/100], Loss: 1.0213, Training Accuracy: 69.92%
+Test Accuracy: 31.00%
+Epoch [16/100], Loss: 0.9613, Training Accuracy: 71.30%
+Test Accuracy: 37.24%
+Epoch [17/100], Loss: 0.9234, Training Accuracy: 72.60%
+Test Accuracy: 36.02%
+Epoch [18/100], Loss: 0.8767, Training Accuracy: 73.51%
+Test Accuracy: 35.29%
+Epoch [19/100], Loss: 0.8418, Training Accuracy: 74.74%
+Test Accuracy: 31.69%
+Epoch [20/100], Loss: 0.8363, Training Accuracy: 74.93%
+Test Accuracy: 38.53%
+Epoch [21/100], Loss: 0.7951, Training Accuracy: 75.98%
+Test Accuracy: 44.69%
+Epoch [22/100], Loss: 0.7727, Training Accuracy: 76.76%
+Test Accuracy: 42.79%
+Epoch [23/100], Loss: 0.7461, Training Accuracy: 77.20%
+Test Accuracy: 41.73%
+Epoch [24/100], Loss: 0.7274, Training Accuracy: 77.75%
+Test Accuracy: 40.60%
+Epoch [25/100], Loss: 0.7142, Training Accuracy: 77.61%
+Test Accuracy: 39.02%
+Epoch [26/100], Loss: 0.7007, Training Accuracy: 77.93%
+Test Accuracy: 51.62%
+Epoch [27/100], Loss: 0.6944, Training Accuracy: 78.12%
+Test Accuracy: 38.41%
+Epoch [28/100], Loss: 0.6599, Training Accuracy: 79.25%
+Test Accuracy: 46.92%
+Epoch [29/100], Loss: 0.6515, Training Accuracy: 79.57%
+Test Accuracy: 39.02%
+Epoch [30/100], Loss: 0.6497, Training Accuracy: 79.53%
+Test Accuracy: 41.45%
+Epoch [31/100], Loss: 0.6344, Training Accuracy: 80.02%
+Test Accuracy: 41.00%
+Epoch [32/100], Loss: 0.6165, Training Accuracy: 80.28%
+Test Accuracy: 36.02%
+Epoch [33/100], Loss: 0.6041, Training Accuracy: 81.14%
+Test Accuracy: 46.19%
+Epoch [34/100], Loss: 0.5843, Training Accuracy: 81.15%
+Test Accuracy: 49.59%
+Epoch [35/100], Loss: 0.5763, Training Accuracy: 81.69%
+Test Accuracy: 56.24%
+Epoch [36/100], Loss: 0.5699, Training Accuracy: 81.58%
+Test Accuracy: 43.40%
+Epoch [37/100], Loss: 0.5621, Training Accuracy: 81.76%
+Test Accuracy: 45.10%
+Traceback (most recent call last):
+  File "/home/ashutosh24135/Point-JEPA/script/baseline.py", line 84, in <module>
+    logits = model(points)
+  File "/home/ashutosh24135/miniconda3/envs/point-jepa/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ashutosh24135/miniconda3/envs/point-jepa/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ashutosh24135/Point-JEPA/script/baseline.py", line 47, in forward
+    tokens, positional_embeddings = self.tokenizer(x)
+  File "/home/ashutosh24135/miniconda3/envs/point-jepa/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ashutosh24135/miniconda3/envs/point-jepa/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ashutosh24135/Point-JEPA/script/tokenizer.py", line 163, in forward
+    sampled_points, grouped_points = self.tokenize(point_clouds)
+  File "/home/ashutosh24135/Point-JEPA/script/tokenizer.py", line 145, in tokenize
+    sampled_points = self.farthest_point_sampling(point_clouds, self.num_samples)
+  File "/home/ashutosh24135/Point-JEPA/script/tokenizer.py", line 102, in farthest_point_sampling
+    distances = torch.minimum(distances, dist_to_last_sampled.squeeze(-1))  # Update distances to the nearest sampled point
+KeyboardInterrupt

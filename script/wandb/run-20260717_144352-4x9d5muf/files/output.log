@@ -1,0 +1,86 @@
+Epoch [1/100], Loss: 3.7243, Training Accuracy: 3.49%
+Test Accuracy: 4.05%
+Epoch [2/100], Loss: 3.4425, Training Accuracy: 10.32%
+Test Accuracy: 6.16%
+Epoch [3/100], Loss: 2.8162, Training Accuracy: 23.01%
+Test Accuracy: 19.12%
+Epoch [4/100], Loss: 2.0775, Training Accuracy: 38.94%
+Test Accuracy: 27.71%
+/home/ashutosh24135/miniconda3/envs/point-jepa/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:209: UserWarning: The epoch parameter in `scheduler.step()` was not necessary and is being deprecated where possible. Please use `scheduler.step()` to step the scheduler. During the deprecation, if epoch is different from None, the closed form is used instead of the new chainable form, where available. Please open an issue if you are unable to replicate your use case: https://github.com/pytorch/pytorch/issues/new/choose.
+  warnings.warn(EPOCH_DEPRECATION_WARNING, UserWarning)
+Epoch [5/100], Loss: 1.6325, Training Accuracy: 52.58%
+Test Accuracy: 38.01%
+Epoch [6/100], Loss: 1.2957, Training Accuracy: 62.64%
+Test Accuracy: 42.87%
+Epoch [7/100], Loss: 1.0761, Training Accuracy: 68.96%
+Test Accuracy: 37.28%
+Epoch [8/100], Loss: 0.9443, Training Accuracy: 72.02%
+Test Accuracy: 40.76%
+Epoch [9/100], Loss: 0.8385, Training Accuracy: 74.39%
+Test Accuracy: 42.59%
+Epoch [10/100], Loss: 0.7517, Training Accuracy: 77.39%
+Test Accuracy: 55.31%
+Epoch [11/100], Loss: 0.7082, Training Accuracy: 78.00%
+Test Accuracy: 51.86%
+Epoch [12/100], Loss: 0.6585, Training Accuracy: 79.76%
+Test Accuracy: 52.55%
+Epoch [13/100], Loss: 0.6149, Training Accuracy: 80.85%
+Test Accuracy: 57.41%
+Epoch [14/100], Loss: 0.5982, Training Accuracy: 81.38%
+Test Accuracy: 60.58%
+Epoch [15/100], Loss: 0.5711, Training Accuracy: 81.90%
+Test Accuracy: 55.71%
+Epoch [16/100], Loss: 0.5503, Training Accuracy: 82.60%
+Test Accuracy: 57.21%
+Epoch [17/100], Loss: 0.5289, Training Accuracy: 83.52%
+Test Accuracy: 61.22%
+Epoch [18/100], Loss: 0.5087, Training Accuracy: 83.70%
+Test Accuracy: 61.26%
+Epoch [19/100], Loss: 0.4924, Training Accuracy: 84.16%
+Test Accuracy: 61.75%
+Epoch [20/100], Loss: 0.4711, Training Accuracy: 84.79%
+Test Accuracy: 64.14%
+Epoch [21/100], Loss: 0.4719, Training Accuracy: 85.04%
+Test Accuracy: 60.98%
+Epoch [22/100], Loss: 0.4530, Training Accuracy: 85.29%
+Test Accuracy: 57.46%
+Epoch [23/100], Loss: 0.4384, Training Accuracy: 85.54%
+Test Accuracy: 61.06%
+Epoch [24/100], Loss: 0.4215, Training Accuracy: 85.97%
+Test Accuracy: 57.50%
+Epoch [25/100], Loss: 0.4133, Training Accuracy: 86.30%
+Test Accuracy: 61.67%
+Epoch [26/100], Loss: 0.3966, Training Accuracy: 86.88%
+Test Accuracy: 62.48%
+Epoch [27/100], Loss: 0.3976, Training Accuracy: 86.90%
+Test Accuracy: 56.97%
+Epoch [28/100], Loss: 0.3918, Training Accuracy: 87.04%
+Test Accuracy: 65.88%
+Epoch [29/100], Loss: 0.3865, Training Accuracy: 87.28%
+Test Accuracy: 63.17%
+Epoch [30/100], Loss: 0.3766, Training Accuracy: 87.53%
+Test Accuracy: 65.84%
+Epoch [31/100], Loss: 0.3611, Training Accuracy: 87.99%
+Test Accuracy: 63.49%
+Epoch [32/100], Loss: 0.3618, Training Accuracy: 87.92%
+Test Accuracy: 63.86%
+Epoch [33/100], Loss: 0.3529, Training Accuracy: 88.18%
+Test Accuracy: 64.42%
+Epoch [34/100], Loss: 0.3485, Training Accuracy: 88.38%
+Test Accuracy: 66.33%
+Traceback (most recent call last):
+  File "/home/ashutosh24135/Point-JEPA/script/baseline.py", line 79, in <module>
+    for points, labels in dataset_train_loader:
+  File "/home/ashutosh24135/miniconda3/envs/point-jepa/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 734, in __next__
+    data = self._next_data()
+  File "/home/ashutosh24135/miniconda3/envs/point-jepa/lib/python3.9/site-packages/torch/utils/data/dataloader.py", line 790, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/home/ashutosh24135/miniconda3/envs/point-jepa/lib/python3.9/site-packages/torch/utils/data/_utils/fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/ashutosh24135/miniconda3/envs/point-jepa/lib/python3.9/site-packages/torch/utils/data/_utils/fetch.py", line 52, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/ashutosh24135/Point-JEPA/script/dataset.py", line 88, in __getitem__
+    sample = jitter_point_cloud(sample)
+  File "/home/ashutosh24135/Point-JEPA/script/dataset.py", line 63, in jitter_point_cloud
+    noise = np.clip(np.random.normal(0, sigma, points.shape), -clip, clip)
+KeyboardInterrupt
