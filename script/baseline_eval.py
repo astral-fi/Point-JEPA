@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from dataset import DATASET_PATH, concatenate_h5_files, ModelNet40Dataset
 from torch.utils.data import DataLoader
 from baseline import BaselineModel
-from tokenizer import PointCloudTokenizer
+from tokenizer import PointCloudTokenizer as tokenizer
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -13,7 +13,6 @@ dataset_test = ModelNet40Dataset(data_test, label_test, 1024, augment=False)
 dataset_test_loader = DataLoader(dataset_test, batch_size=64, shuffle=False)
 
 
-tokenizer = PointCloudTokenizer(token_dim=128, num_tokens=64, num_points=1024)
 model = BaselineModel(tokenizer).to(device)
 model.load_state_dict(torch.load('best_baseline_model.pth', map_location=device))
 
@@ -131,4 +130,4 @@ print("Top 10 confused pairs (true → predicted, count):")
 for count, true_cls, pred_cls in pairs[:10]:
     print(f"  {true_cls:15s} → {pred_cls:15s} : {count}")
 
-    
+
