@@ -59,18 +59,21 @@ class PointCloudTokenizer(nn.Module):
             nn.Linear(3, 64),
             nn.GELU(), #Gaussian Error Linear Unit activation function
             nn.Linear(64, 128),
+            nn.LayerNorm(128),
         )
 
         self.tokens_layer_2 = nn.Sequential(
             nn.Linear(256, 256),
             nn.GELU(),
             nn.Linear(256, self.token_dim),
+            nn.LayerNorm(self.token_dim),
         )
 
         self.positional_layer_1 = nn.Sequential(
             nn.Linear(3, 64),
             nn.GELU(),
             nn.Linear(64, self.token_dim),
+            nn.LayerNorm(self.token_dim),
         )
 
     
