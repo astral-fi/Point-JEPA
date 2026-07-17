@@ -20,8 +20,8 @@ wandb.init(
     project="point-jepa",
     name="baseline-initial",
     config={
-        "num_layers": 4,
-        "num_heads": 4,
+        "num_layers": 8,
+        "num_heads": 2,
         "token_dim": 128,
         "ff_dim": 512,
         "dropout": 0.1,
@@ -38,7 +38,7 @@ class BaselineModel(nn.Module):
         super(BaselineModel, self).__init__()
         self.tokenizer = tokenizer
         self.encoder_layer = nn.TransformerEncoderLayer(d_model=128, nhead=8, dim_feedforward=512, batch_first=True, activation='gelu')
-        self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=4)
+        self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=2)
         self.cls_token = nn.Parameter(torch.randn(1, 1, tokenizer.token_dim) * 0.02)
 
         self.linear_head = nn.Linear(tokenizer.token_dim, 40)  # Assuming 40 classes for ModelNet40
