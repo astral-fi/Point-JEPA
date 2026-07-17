@@ -20,3 +20,5 @@ dist/
 
 # macOS
 .DS_Store
+
+script/wandb/
