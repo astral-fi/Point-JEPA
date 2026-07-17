@@ -140,23 +140,23 @@ def visualize_point_cloud_plotly(point_cloud, title="ModelNet40 Object"):
     )
     fig.show()
 
+if __name__ == "__main__":
+    data_train, label_train = concatenate_h5_files(DATASET_PATH, 5, 'train')
+    data_test, label_test = concatenate_h5_files(DATASET_PATH, 2, 'test')
 
-data_train, label_train = concatenate_h5_files(DATASET_PATH, 5, 'train')
-data_test, label_test = concatenate_h5_files(DATASET_PATH, 2, 'test')
+    dataset_train = ModelNet40Dataset(data_train, label_train, 1024)
+    dataset_train_loader = DataLoader(dataset_train, batch_size=64, shuffle=True)
+    dataset_test = ModelNet40Dataset(data_test, label_test, 1024)
+    dataset_test_loader = DataLoader(dataset_test, batch_size=64, shuffle=False)
 
-dataset_train = ModelNet40Dataset(data_train, label_train, 1024)
-dataset_train_loader = DataLoader(dataset_train, batch_size=64, shuffle=True)
-dataset_test = ModelNet40Dataset(data_test, label_test, 1024)
-dataset_test_loader = DataLoader(dataset_test, batch_size=64, shuffle=False)
+    for points, labels in dataset_test_loader:
 
-for points, labels in dataset_test_loader:
-
-    for i in range(min(5, points.size(0))):  # Visualize up to 5 point clouds
-        visualize_point_cloud_plotly(points[i].numpy(), title=f"Label: {labels[i].item()}")
-        rotated_points = rotate_point_cloud(points[i].numpy())
-        jittered_points = jitter_point_cloud(points[i].numpy())
-        scaled_points = scale_point_cloud(points[i].numpy())
-        visualize_point_cloud_plotly(scaled_points, title=f"Scaled Point Cloud - Label: {labels[i].item()}")
+        for i in range(min(5, points.size(0))):  # Visualize up to 5 point clouds
+            visualize_point_cloud_plotly(points[i].numpy(), title=f"Label: {labels[i].item()}")
+            rotated_points = rotate_point_cloud(points[i].numpy())
+            jittered_points = jitter_point_cloud(points[i].numpy())
+            scaled_points = scale_point_cloud(points[i].numpy())
+            visualize_point_cloud_plotly(scaled_points, title=f"Scaled Point Cloud - Label: {labels[i].item()}")
 
 
-    break  # Just inspect the first batch
+        break  # Just inspect the first batch
