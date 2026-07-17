@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from dataset import DATASET_PATH, concatenate_h5_files, ModelNet40Dataset
 from torch.utils.data import DataLoader
 from baseline import BaselineModel
-from tokenizer import PointCloudTokenizer as tokenizer
+from tokenizer import PointCloudTokenizer as Tokenizer
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -12,7 +12,7 @@ data_test, label_test = concatenate_h5_files(DATASET_PATH, 2, 'test')
 dataset_test = ModelNet40Dataset(data_test, label_test, 1024, augment=False)
 dataset_test_loader = DataLoader(dataset_test, batch_size=64, shuffle=False)
 
-
+tokenizer = Tokenizer(num_samples=64, k_neighbors=32, token_dim=128)
 model = BaselineModel(tokenizer).to(device)
 model.load_state_dict(torch.load('best_baseline_model.pth', map_location=device))
 
