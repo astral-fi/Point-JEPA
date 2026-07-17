@@ -40,22 +40,58 @@ def concatenate_h5_files(dataset_path, num_files=5, dataset_type='train'):
     label = np.concatenate(label, axis=0)
     return data, label
 
+def rotate_point_cloud(points, axis='y'):
+    theta = np.random.uniform(0, 2 * np.pi)
+    cos_t, sin_t = np.cos(theta), np.sin(theta)
+
+    if axis == 'y':
+        rotation_matrix = np.array([
+            [cos_t,  0, sin_t],
+            [0,      1, 0    ],
+            [-sin_t, 0, cos_t],
+        ])
+    elif axis == 'z':
+        rotation_matrix = np.array([
+            [cos_t, -sin_t, 0],
+            [sin_t,  cos_t, 0],
+            [0,      0,     1],
+        ])
+
+    return points @ rotation_matrix.T
+
+def jitter_point_cloud(points, sigma=0.01, clip=0.02):
+    noise = np.clip(np.random.normal(0, sigma, points.shape), -clip, clip)
+    return points + noise
+
+def scale_point_cloud(points, scale_low=0.8, scale_high=1.2):
+    scale = np.random.uniform(scale_low, scale_high)
+    return points * scale
+
+
+
 
 class ModelNet40Dataset(Dataset):
-    def __init__(self, data, labels, target_points=2048):
+    def __init__(self, data, labels, target_points=2048, augment =True):
         self.data = data
         self.labels = labels
         self.target_points = target_points  # Number of points to sample from each point cloud
+        self.augment = augment
 
     def __len__(self):
         return len(self.data)
 
     def __getitem__(self, idx):
         sample = self.data[idx]
-        random_indices = np.random.choice(sample.shape[0], self.target_points, replace=False)
-        sample = sample[random_indices]
-        sample = sample - sample.mean(axis=0)  # Center the point cloud
-        sample = sample / np.linalg.norm(sample, axis=1).max()  # Normalize to unit sphere
+
+        if self.augment:
+            sample = rotate_point_cloud(sample)
+            sample = jitter_point_cloud(sample)
+            sample = scale_point_cloud(sample)
+            random_indices = np.random.choice(sample.shape[0], self.target_points, replace=False)
+            sample = sample[random_indices]
+            sample = sample - sample.mean(axis=0)  # Center the point cloud
+            sample = sample / np.linalg.norm(sample, axis=1).max()  # Normalize to unit sphere
+            
         sample = sample.astype(np.float32)
         sample = torch.from_numpy(sample)
         label = self.labels[idx][0].astype(np.int64)
