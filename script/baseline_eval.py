@@ -94,18 +94,6 @@ plt.show()
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
 
-cm = confusion_matrix(all_labels.numpy(), all_preds.numpy())
-
-fig, ax = plt.subplots(figsize=(14, 12))
-sns.heatmap(cm, ax=ax, cmap='Blues', square=True, cbar=True)
-ax.set_xlabel('Predicted')
-ax.set_ylabel('True')
-ax.set_title('Confusion Matrix — ModelNet40 Baseline')
-plt.tight_layout()
-plt.savefig('confusion_matrix.png', dpi=150)
-plt.show()
-
-# ModelNet40 class names, in the standard label-index order
 class_names = [
     'airplane', 'bathtub', 'bed', 'bench', 'bookshelf', 'bottle', 'bowl', 'car',
     'chair', 'cone', 'cup', 'curtain', 'desk', 'door', 'dresser', 'flower_pot',
@@ -114,6 +102,24 @@ class_names = [
     'sofa', 'stairs', 'stool', 'table', 'tent', 'toilet', 'tv_stand', 'vase',
     'wardrobe', 'xbox'
 ]
+
+cm = confusion_matrix(all_labels.numpy(), all_preds.numpy())
+cm_normalized = cm.astype('float') / cm.sum(axis=1, keepdims=True)
+
+fig, ax = plt.subplots(figsize=(16, 14))
+sns.heatmap(cm_normalized, ax=ax, cmap='Blues', square=True, cbar=True,
+            xticklabels=class_names, yticklabels=class_names,
+            vmin=0, vmax=1)
+plt.xticks(rotation=90)
+plt.yticks(rotation=0)
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.title('Confusion Matrix — ModelNet40 Baseline (row-normalized)')
+plt.tight_layout()
+plt.savefig('confusion_matrix.png', dpi=150)
+plt.show()
+
+# ModelNet40 class names, in the standard label-index order
 
 cm_offdiag = cm.copy()
 np.fill_diagonal(cm_offdiag, 0)
