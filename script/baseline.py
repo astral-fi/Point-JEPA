@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import LinearLR, CosineAnnealingLR, SequentialLR
-
+import wandb
 
 data_train, label_train = concatenate_h5_files(DATASET_PATH, 5, 'train')
 data_test, label_test = concatenate_h5_files(DATASET_PATH, 2, 'test')
@@ -15,6 +15,23 @@ dataset_test = ModelNet40Dataset(data_test, label_test, 1024)
 dataset_test_loader = DataLoader(dataset_test, batch_size=64, shuffle=False)
 print(f"Training dataset size: {len(dataset_train)}, Testing dataset size: {len(dataset_test)}")
 
+
+wandb.init(
+    project="point-jepa",
+    name="baseline-initial",
+    config={
+        "num_layers": 4,
+        "num_heads": 4,
+        "token_dim": 128,
+        "ff_dim": 512,
+        "dropout": 0.1,
+        "lr": 3e-4,
+        "weight_decay": 0.01,
+        "batch_size": 64,
+        "num_epochs": 100,
+        "warmup_epochs": 10,
+    },
+)
 
 class BaselineModel(nn.Module):
     def __init__(self, tokenizer):
@@ -44,7 +61,7 @@ if __name__ == "__main__":
     model = BaselineModel(tokenizer)
     model.to('cuda' if torch.cuda.is_available() else 'cpu')  # Move the model to GPU if available
 
-    optimizer = torch.optim.AdamW(model.parameters(), lr=0.0001, weight_decay=1e-4)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=0.0003, weight_decay=0.01)
     criterion = nn.CrossEntropyLoss()
     EPOCHS = 100
     warmup_epochs = 10
@@ -77,8 +94,8 @@ if __name__ == "__main__":
             scheduler.step()  # Update the learning rate scheduler
             train_loss += loss.item()
 
-        accuracy = 100 * correct / total
-        print(f"Epoch [{epoch+1}/{EPOCHS}], Loss: {train_loss/len(dataset_train_loader):.4f}, Training Accuracy: {accuracy:.2f}%")
+        train_accuracy = 100 * correct / total
+        print(f"Epoch [{epoch+1}/{EPOCHS}], Loss: {train_loss/len(dataset_train_loader):.4f}, Training Accuracy: {train_accuracy:.2f}%")
 
         with torch.no_grad():
             model.eval()
@@ -94,5 +111,16 @@ if __name__ == "__main__":
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
 
-            accuracy = 100 * correct / total
-            print(f"Test Accuracy: {accuracy:.2f}%")
+            test_accuracy = 100 * correct / total
+            print(f"Test Accuracy: {test_accuracy:.2f}%")
+
+
+        current_lr = optimizer.param_groups[0]['lr']
+        
+        wandb.log({
+        "epoch": epoch,
+        "train/loss": train_loss,
+        "train/accuracy": train_accuracy,
+        "test/accuracy": test_accuracy,
+        "lr": current_lr,
+        })
