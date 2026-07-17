@@ -144,7 +144,10 @@ class PointCloudTokenizer(nn.Module):
 
         sampled_points = self.farthest_point_sampling(point_clouds, self.num_samples)
         knn_indices = self.k_nearest_neighbors(point_clouds, sampled_points, self.k_neighbors)
-        return sampled_points, knn_indices
+        grouped_points = point_clouds[torch.arange(point_clouds.shape[0])[:, None, None], knn_indices]  # Shape: (B, M, k, 3)
+        grouped_points = grouped_points - sampled_points.unsqueeze(2)  # Center the k-nearest neighbors around the sampled point
+
+        return sampled_points, grouped_points
 
     def forward(self, point_clouds):
         """
@@ -157,10 +160,8 @@ class PointCloudTokenizer(nn.Module):
         torch.Tensor: Tokenized representation of the point clouds.
         """
         
-        sampled_points, knn_indices = self.tokenize(point_clouds)
-        grouped_points = point_clouds[torch.arange(point_clouds.shape[0])[:, None, None], knn_indices]  # Shape: (B, M, k, 3)
-        grouped_points = grouped_points - sampled_points.unsqueeze(2)  # Center the k-nearest neighbors around the sampled points
-        
+        sampled_points, grouped_points = self.tokenize(point_clouds)
+    
         # Convert sampled points to torch tensor
         grouped_points_tensor = grouped_points.float().to(point_clouds.device)  # Shape: (B, M, k, 3)
         sampled_points_tensor = sampled_points.float().to(point_clouds.device)  # Shape: (B, M, 3)
