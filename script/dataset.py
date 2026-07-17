@@ -86,6 +86,16 @@ class ModelNet40Dataset(Dataset):
         sample = sample / np.linalg.norm(sample, axis=1).max()  # Normalize to unit sphere
 
         random_indices = np.random.choice(sample.shape[0], self.target_points, replace=False)
+        if self.augment:
+        # Training phase: Pick a completely different subset every single epoch
+            random_indices = np.random.choice(sample.shape[0], self.target_points, replace=False)
+        else:
+            # Testing phase: Lock the seed to the sample's index
+            # This guarantees the exact same 2048 points are chosen every epoch
+            local_rng = np.random.RandomState(idx)
+            random_indices = local_rng.choice(sample.shape[0], self.target_points, replace=False)
+
+
         sample = sample[random_indices]
 
         if self.augment:
