@@ -5,7 +5,7 @@ from torch.utils.data import Dataset
 import matplotlib.pyplot as plt
 
 torch.manual_seed(42)  # For reproducibility
-
+np.random.seed(42)  # For reproducibility
 
 DATASET_PATH = '../modelnet40_ply_hdf5_2048'  # Replace with your HDF5 file path
 
