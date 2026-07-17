@@ -82,6 +82,9 @@ class ModelNet40Dataset(Dataset):
     def __getitem__(self, idx):
         sample = self.data[idx]
 
+        sample = sample - sample.mean(axis=0)  # Center the point cloud
+        sample = sample / np.linalg.norm(sample, axis=1).max()  # Normalize to unit sphere
+
         if self.augment:
             sample = rotate_point_cloud(sample)
             sample = jitter_point_cloud(sample)
@@ -89,8 +92,6 @@ class ModelNet40Dataset(Dataset):
             random_indices = np.random.choice(sample.shape[0], self.target_points, replace=False)
             sample = sample[random_indices]
             
-        sample = sample - sample.mean(axis=0)  # Center the point cloud
-        sample = sample / np.linalg.norm(sample, axis=1).max()  # Normalize to unit sphere
         sample = sample.astype(np.float32)
         sample = torch.from_numpy(sample)
         label = self.labels[idx][0].astype(np.int64)
