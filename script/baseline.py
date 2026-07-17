@@ -37,11 +37,13 @@ class BaselineModel(nn.Module):
     def __init__(self, tokenizer):
         super(BaselineModel, self).__init__()
         self.tokenizer = tokenizer
-        self.encoder_layer = nn.TransformerEncoderLayer(d_model=128, nhead=8, dim_feedforward=512, batch_first=True, activation='gelu')
+        self.encoder_layer = nn.TransformerEncoderLayer(d_model=128, nhead=4, dim_feedforward=512, batch_first=True, activation='gelu')
         self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=2)
         self.cls_token = nn.Parameter(torch.randn(1, 1, tokenizer.token_dim) * 0.02)
 
-        self.linear_head = nn.Linear(tokenizer.token_dim, 40)  # Assuming 40 classes for ModelNet40
+        self.head_count = nn.Dropout(0.3)
+
+        self.linear_head = nn.Linear(tokenizer.token_dim * 2, 40)  # Assuming 40 classes for ModelNet40
 
     def forward(self, x):
         tokens, positional_embeddings = self.tokenizer(x)
@@ -51,6 +53,8 @@ class BaselineModel(nn.Module):
         combined_tokens = torch.cat((cls, combined_tokens), dim=1)  # Concatenate cls token with the combined tokens
         x = self.encoder(combined_tokens)
         x = x[:, 0, :]  # Extract the cls token representation
+        max_pooled, _ = torch.max(x[:, 1:, :], dim=1)  # Max pooling over the token dimension (excluding cls token)
+        x = torch.cat((x[:, 0, :], max_pooled), dim=-1)  # Concatenate cls token representation with max pooled representation
         x = self.linear_head(x)
         return x
 
