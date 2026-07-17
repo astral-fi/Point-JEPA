@@ -9,7 +9,7 @@ import wandb
 data_train, label_train = concatenate_h5_files(DATASET_PATH, 5, 'train')
 data_test, label_test = concatenate_h5_files(DATASET_PATH, 2, 'test')
 
-dataset_train = ModelNet40Dataset(data_train, label_train, 1024, augment=False)
+dataset_train = ModelNet40Dataset(data_train, label_train, 1024, augment=True)
 dataset_train_loader = DataLoader(dataset_train, batch_size=64, shuffle=True)
 dataset_test = ModelNet40Dataset(data_test, label_test, 1024, augment=False)
 dataset_test_loader = DataLoader(dataset_test, batch_size=64, shuffle=False)
