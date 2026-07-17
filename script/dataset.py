@@ -39,7 +39,7 @@ def concatenate_h5_files(dataset_path, num_files=5, dataset_type='train'):
     label = np.concatenate(label, axis=0)
     return data, label
 
-def rotate_point_cloud(points, axis='z'):
+def rotate_point_cloud(points, axis='y'):
     theta = np.random.uniform(0, 2 * np.pi)
     cos_t, sin_t = np.cos(theta), np.sin(theta)
 
@@ -85,14 +85,14 @@ class ModelNet40Dataset(Dataset):
         sample = sample - sample.mean(axis=0)  # Center the point cloud
         sample = sample / np.linalg.norm(sample, axis=1).max()  # Normalize to unit sphere
 
+        random_indices = np.random.choice(sample.shape[0], self.target_points, replace=False)
+        sample = sample[random_indices]
+
         if self.augment:
-            random_indices = np.random.choice(sample.shape[0], self.target_points, replace=False)
-            sample = sample[random_indices]
             sample = jitter_point_cloud(sample)
             sample = rotate_point_cloud(sample)
             sample = scale_point_cloud(sample)
             sample = sample - sample.mean(axis=0)  # Center the point cloud
-            sample = sample / np.linalg.norm(sample, axis=1).max()
             
         sample = sample.astype(np.float32)
         sample = torch.from_numpy(sample)
