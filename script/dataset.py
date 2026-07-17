@@ -86,11 +86,11 @@ class ModelNet40Dataset(Dataset):
         sample = sample / np.linalg.norm(sample, axis=1).max()  # Normalize to unit sphere
 
         if self.augment:
+            random_indices = np.random.choice(sample.shape[0], self.target_points, replace=False)
+            sample = sample[random_indices]
             sample = rotate_point_cloud(sample)
             sample = jitter_point_cloud(sample)
             sample = scale_point_cloud(sample)
-            random_indices = np.random.choice(sample.shape[0], self.target_points, replace=False)
-            sample = sample[random_indices]
             
         sample = sample.astype(np.float32)
         sample = torch.from_numpy(sample)
