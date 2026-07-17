@@ -44,10 +44,10 @@ if __name__ == "__main__":
     model = BaselineModel(tokenizer)
     model.to('cuda' if torch.cuda.is_available() else 'cpu')  # Move the model to GPU if available
 
-    optimizer = torch.optim.AdamW(model.parameters(), lr=0.001, weight_decay=1e-4)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=0.0001, weight_decay=1e-4)
     criterion = nn.CrossEntropyLoss()
-    EPOCHS = 50
-    warmup_epochs = 5
+    EPOCHS = 100
+    warmup_epochs = 10
 
     warmup_scheduler = LinearLR(optimizer, start_factor=0.01, end_factor=1.0, total_iters=warmup_epochs)
     cosine_scheduler = CosineAnnealingLR(optimizer, T_max=EPOCHS - warmup_epochs, eta_min=1e-6)
