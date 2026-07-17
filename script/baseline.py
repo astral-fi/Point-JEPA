@@ -91,8 +91,9 @@ if __name__ == "__main__":
             loss.backward()
             optimizer.step()
             optimizer.zero_grad()
-            scheduler.step()  # Update the learning rate scheduler
             train_loss += loss.item()
+
+        scheduler.step()  # Update the learning rate scheduler
 
         train_accuracy = 100 * correct / total
         print(f"Epoch [{epoch+1}/{EPOCHS}], Loss: {train_loss/len(dataset_train_loader):.4f}, Training Accuracy: {train_accuracy:.2f}%")
@@ -116,7 +117,7 @@ if __name__ == "__main__":
 
 
         current_lr = optimizer.param_groups[0]['lr']
-        
+
         wandb.log({
         "epoch": epoch,
         "train/loss": train_loss,
