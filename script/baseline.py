@@ -13,8 +13,8 @@ class BaselineModel(nn.Module):
     def __init__(self, tokenizer):
         super(BaselineModel, self).__init__()
         self.tokenizer = tokenizer
-        self.encoder_layer = nn.TransformerEncoderLayer(d_model=128, nhead=4, dim_feedforward=512, batch_first=True, activation='gelu')
-        self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=2)
+        self.encoder_layer = nn.TransformerEncoderLayer(d_model=tokenizer.token_dim, nhead=6, dim_feedforward=512, batch_first=True, activation='gelu')
+        self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=4)
         self.cls_token = nn.Parameter(torch.randn(1, 1, tokenizer.token_dim) * 0.02)
 
         self.head_count = nn.Dropout(0.3)
@@ -51,8 +51,8 @@ if __name__ == "__main__":
     project="point-jepa",
     name="baseline-initial",
     config={
-        "num_layers": 8,
-        "num_heads": 2,
+        "num_layers": 4,
+        "num_heads": 6,
         "token_dim": 128,
         "ff_dim": 512,
         "dropout": 0.1,
@@ -63,7 +63,7 @@ if __name__ == "__main__":
         "warmup_epochs": 10,
     },
     )
-    tokenizer = Tokenizer(num_samples=64, k_neighbors=32, token_dim=128)
+    tokenizer = Tokenizer(num_samples=64, k_neighbors=32, token_dim=256)
 
     tokenizer.to('cuda' if torch.cuda.is_available() else 'cpu')  # Move the model to GPU if available
     model = BaselineModel(tokenizer)
