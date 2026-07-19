@@ -13,7 +13,7 @@ class BaselineModel(nn.Module):
     def __init__(self, tokenizer):
         super(BaselineModel, self).__init__()
         self.tokenizer = tokenizer
-        self.encoder_layer = nn.TransformerEncoderLayer(d_model=tokenizer.token_dim, nhead=6, dim_feedforward=512, batch_first=True, activation='gelu', dropout=0.2)
+        self.encoder_layer = nn.TransformerEncoderLayer(d_model=tokenizer.token_dim, nhead=8, dim_feedforward=512, batch_first=True, activation='gelu', dropout=0.2)
         self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=4)
         self.cls_token = nn.Parameter(torch.randn(1, 1, tokenizer.token_dim) * 0.02)
 
