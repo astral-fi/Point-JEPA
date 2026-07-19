@@ -13,7 +13,7 @@ class BaselineModel(nn.Module):
     def __init__(self, tokenizer):
         super(BaselineModel, self).__init__()
         self.tokenizer = tokenizer
-        self.encoder_layer = nn.TransformerEncoderLayer(d_model=tokenizer.token_dim, nhead=6, dim_feedforward=512, batch_first=True, activation='gelu')
+        self.encoder_layer = nn.TransformerEncoderLayer(d_model=tokenizer.token_dim, nhead=6, dim_feedforward=512, batch_first=True, activation='gelu', dropout=0.2)
         self.encoder = nn.TransformerEncoder(self.encoder_layer, num_layers=4)
         self.cls_token = nn.Parameter(torch.randn(1, 1, tokenizer.token_dim) * 0.02)
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     model.to('cuda' if torch.cuda.is_available() else 'cpu')  # Move the model to GPU if available
 
     optimizer = torch.optim.AdamW(model.parameters(), lr=0.0003, weight_decay=0.05)
-    criterion = nn.CrossEntropyLoss()
+    criterion = nn.CrossEntropyLoss(label_smoothing=0.2)  # Using label smoothing for better generalization
     EPOCHS = 100
     warmup_epochs = 5
 
@@ -83,6 +83,7 @@ if __name__ == "__main__":
     patience_counter = 0
 
     for epoch in range(EPOCHS):
+        model.train()
         train_loss = 0.0
         correct = 0
         total = 0
